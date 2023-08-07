@@ -1,2 +1,2 @@
-login = "f"
+login = ""
 password = ""
