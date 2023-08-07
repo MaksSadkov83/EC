@@ -6,7 +6,7 @@ from auth_data import login, password
 from parcer_xlsx import get_data_xlsx
 
 
-def ec_selenuim(driver):
+def ec_selenuim(driver, abbiturients):
     try:
         driver.get("https://ec.adm-nao.ru/auth/login-page")
         time.sleep(3)
@@ -28,14 +28,13 @@ def ec_selenuim(driver):
         input = driver.find_element(By.CSS_SELECTOR, "input.x-form-text.x-form-field")
         input.clear()
         input.send_keys("2023/2024")
-        with open("name.txt", "r") as file_read:
+        with open("name.txt", "r", encoding="utf8") as file_read:
             name = file_read.readlines()
             name = [l.rstrip("\n") for l in name]
 
         time.sleep(1)
 
         input.send_keys(Keys.ENTER)
-        abbiturients = get_data_xlsx()
         time.sleep(5)
 
         for abbiturient in abbiturients:
@@ -146,7 +145,8 @@ def ec_selenuim(driver):
 
 def main():
     driver = webdriver.Firefox()
-    ec_selenuim(driver=driver)
+    abbiturients = get_data_xlsx()
+    ec_selenuim(driver=driver, abbiturients=abbiturients)
 
 
 if __name__ == "__main__":
